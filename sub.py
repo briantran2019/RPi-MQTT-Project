@@ -1,21 +1,45 @@
 import paho.mqtt.client as mqtt #import the client1
 import random
 
-print("creating new instance")
-client = mqtt.Client(f"rpi{random.randint(0,100)}") #create new instance
 
 topics = [('system/plant/soilmoisture', 0),
           ('system/plant/numtimeswatered', 0),
           ('system/pump/waterlevel', 0)]
+clientID = f"rpi{random.randint(0,100)}"
+broker = "test.mosquitto.org"
+port = 1883
+
+def connect() -> mqtt:
+    def on_connect(client, userdata, flags, rc):
+        if rc == 0:
+            print(f"Connected to {broker}")
+    print("Creating new instance")
+    client = mqtt.Client(clientID)
+    client.on_connect = on_connect
+    client.connect(broker, port)
+    return client
 
 def on_message(client, userdata, message):
     print("message received " ,str(message.payload.decode("utf-8")))
     print("message topic=",message.topic)
-client.on_message=on_message #attach function to callback
 
-print("connecting to broker")
-broker_address="test.mosquitto.org"
-client.connect(broker_address, 1883) #connect to broker
-print("Subscribing to topic " + str(topics))
-client.subscribe(topics)
-client.loop_forever()
+def on_subscribe(client, userdata, mid, granted_qos):
+    print("Subscribed to Topics: ", end = "")
+    for i in range(len(topics)):
+        if i < len(topics) - 1:
+            print(f'{topics[i][0]}, ', end = "")
+        else:
+            print(f'{topics[i][0]}')
+
+def subscribe(client: mqtt):
+    client.subscribe(topics)
+    client.on_subscribe = on_subscribe
+    client.on_message = on_message
+
+def main():
+    client = connect()
+    subscribe(client)
+    client.loop_forever()
+
+if __name__ == '__main__':
+    main()
