@@ -1,7 +1,6 @@
 import paho.mqtt.client as mqtt #import the client1
 import random
 
-
 topics = [('system/plant/soilmoisture', 0),
           ('system/plant/numtimeswatered', 0),
           ('system/pump/waterlevel', 0)]
@@ -20,8 +19,8 @@ def connect() -> mqtt:
     return client
 
 def on_message(client, userdata, message):
-    print("message received " ,str(message.payload.decode("utf-8")))
-    print("message topic=",message.topic)
+    print("message received:" ,str(message.payload.decode("utf-8")))
+    print("message topic =",message.topic)
 
 def on_subscribe(client, userdata, mid, granted_qos):
     print("Subscribed to Topics: ", end = "")
