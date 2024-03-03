@@ -51,10 +51,8 @@ def main():
                     print("This is a plant msg")
                     publish(client, topics, 0, data)
                     break
-                else:
-                    print("This is a pump message")
-                    publish(client, topics, 1, data)
-                    break
+            print("This is a pump message")
+            publish(client, topics, 1, data)
             f = open("datalog.txt", "a")
             # now = datetime.now(tz = datetime.timezone.utc)
             # current_time = now.strftime("%H:%M:%S")
