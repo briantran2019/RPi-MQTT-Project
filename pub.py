@@ -45,6 +45,7 @@ def main():
 
         if data != '':
             for i in msgs:
+                print(i + "\n")
                 print(data[0:len(i)] + "\n")
                 if data[0:len(i)-1] == i:
                     print("This is a plant msg")
@@ -54,7 +55,6 @@ def main():
                     print("This is a pump message")
                     publish(client, topics, 1, data)
                     break
-            print("Loop")
             f = open("datalog.txt", "a")
             # now = datetime.now(tz = datetime.timezone.utc)
             # current_time = now.strftime("%H:%M:%S")
