@@ -46,7 +46,7 @@ def main():
         if data != '':
             for i, msg in enumerate(msgs):
                 print("i: " + msg)
-                print("data: " + data[0:len(i)])
+                print("data: " + data.startswith(msg))
                 if data.startswith(msg):
                     print("This is a plant msg")
                     publish(client, topics, 0, data)
