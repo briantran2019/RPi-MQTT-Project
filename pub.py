@@ -44,9 +44,9 @@ def main():
         if data != b'':
              print(data)
              f = open("datalog.txt", "a")
-             now = datetime.now(tz = datetime.timezone.utc)
-             current_time = now.strftime("%H:%M:%S")
-             f.write(current_time + " " + data + "\n")
+            # now = datetime.now(tz = datetime.timezone.utc)
+            # current_time = now.strftime("%H:%M:%S")
+             f.write(" " + data + "\n")
              f.close()
         sleep(1)
 
