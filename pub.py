@@ -51,7 +51,7 @@ def main():
                         print("This is a plant msg")
                         publish(client, topics, 0, data)
                     else:
-                         print("This is not a plant msg")
+                        print("This is not a plant msg")
                         publish(client, topics, 1, data)
              f = open("datalog.txt", "a")
             # now = datetime.now(tz = datetime.timezone.utc)
