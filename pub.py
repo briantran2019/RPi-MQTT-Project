@@ -7,7 +7,7 @@ import serial
 topics = [('system/plant/soilmoisture', 0), 
           ('system/pump/waterlevel', 0)]
 
-msgs = ['Current', 'Plant', 'Attempting', 'WATERING STATUS']
+msgs = ['Current Moisture: ', 'Plant needs watering.', 'Attempting to water plant.', 'Plant does not need watering.', 'WATERING STATUS: SUCCESS']
 
 clientID = f"laptop{randint(0,100)}"
 broker="test.mosquitto.org"
@@ -45,9 +45,9 @@ def main():
 
         if data != '':
             for i in msgs:
-                print(i + "\n")
-                print(data[0:len(i)] + "\n")
-                if data[0:len(i)-1] == i:
+                print("i: " + i)
+                print("data: " + data)
+                if data == i:
                     print("This is a plant msg")
                     publish(client, topics, 0, data)
                     break
