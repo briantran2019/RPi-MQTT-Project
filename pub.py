@@ -44,10 +44,10 @@ def main():
         data = seri.readline().decode().rstrip()
 
         if data != '':
-            for i in msgs:
+            for i, msg in enumerate(msgs):
                 print("i: " + i)
                 print("data: " + data[0:len(i)])
-                if data[0:len(i)] == i:
+                if data.startswith(msg):
                     print("This is a plant msg")
                     publish(client, topics, 0, data)
                     break
