@@ -47,7 +47,7 @@ def main():
              f = open("datalog.txt", "a")
             # now = datetime.now(tz = datetime.timezone.utc)
             # current_time = now.strftime("%H:%M:%S")
-             f.write(" " + data + "\n")
+             f.write(" " + data.decode().rstrip() + "\n")
              f.close()
         sleep(1)
 
