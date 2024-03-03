@@ -33,8 +33,8 @@ def main():
     client.loop_start()
     seri = serial.Serial('/dev/ttyACM0', 115200, timeout=1)
     seri.reset_input_buffer()
-    f = open("datalog.txt", "a")
     while True:
+
         #do message stuff
         # 1. write to a log file
         # 2. send the write to the laptop as well
@@ -43,6 +43,7 @@ def main():
         data = seri.readline().decode().rstrip()
         if data != b'':
              print(data)
+             f = open("datalog.txt", "a")
              now = datetime.now(tz = datetime.timezone.utc)
              current_time = now.strftime("%H:%M:%S")
              f.write(current_time + " " + data + "\n")
