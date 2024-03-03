@@ -34,20 +34,21 @@ def main():
     seri = serial.Serial('/dev/ttyACM0', 115200, timeout=1)
     seri.reset_input_buffer()
     while True:
-
+        seri.reset_input_buffer()
         #do message stuff
         # 1. write to a log file
         # 2. send the write to the laptop as well
 
         #make the pi tell the arduino to capture data
         data = seri.readline().decode().rstrip()
+
         if data != '':
-             print(data.decode().rstrip())
-             publish(client, topics, 0, data.decode().rstrip())
+             print(data)
+             publish(client, topics, 0, data)
              f = open("datalog.txt", "a")
             # now = datetime.now(tz = datetime.timezone.utc)
             # current_time = now.strftime("%H:%M:%S")
-             f.write(" " + data.decode().rstrip() + "\n")
+             f.write(" " + data + "\n")
              f.close()
         sleep(1)
 
