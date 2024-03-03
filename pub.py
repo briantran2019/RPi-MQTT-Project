@@ -43,7 +43,8 @@ def main():
         data = seri.readline().decode().rstrip()
         if data != b'':
              print(data)
-             current_time = datetime.now().strftime("%H:%M:%S")
+             now = datetime.now(tz = datetime.timezone.utc)
+             current_time = now.strftime("%H:%M:%S")
              f.write(current_time + " " + data + "\n")
         sleep(1)
 
