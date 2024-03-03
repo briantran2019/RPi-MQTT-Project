@@ -34,7 +34,6 @@ def main():
     seri = serial.Serial('/dev/ttyACM0', 115200, timeout=0)
     seri.reset_input_buffer()
     while True:
-        seri.reset_input_buffer()
         #do message stuff
         # 1. write to a log file
         # 2. send the write to the laptop as well
@@ -50,7 +49,7 @@ def main():
             # current_time = now.strftime("%H:%M:%S")
              f.write(" " + data + "\n")
              f.close()
-        sleep(1)
+
 
 
 
