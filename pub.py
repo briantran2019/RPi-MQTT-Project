@@ -43,6 +43,7 @@ def main():
         data = seri.readline().decode().rstrip()
         if data != b'':
              print(data)
+             publish(client, topics, 0, data)
              f = open("datalog.txt", "a")
             # now = datetime.now(tz = datetime.timezone.utc)
             # current_time = now.strftime("%H:%M:%S")
