@@ -5,8 +5,12 @@ import datetime
 import serial
 
 topics = [('system/plant/soilmoisture', 0), 
-          ('system/plant/numtimeswatered', 0),
           ('system/pump/waterlevel', 0)]
+
+soilmsgs = ['TIME', 'Plant']
+
+pumpmsgs = ['ALERT', 'STARTING']
+
 clientID = f"laptop{randint(0,100)}"
 broker="test.mosquitto.org"
 port = 1883
@@ -42,8 +46,13 @@ def main():
         data = seri.readline().decode().rstrip()
 
         if data != '':
-             print(data)
-             publish(client, topics, 0, data)
+             for i in soilmsgs:
+                    if data[0:len(i)] == i:
+                        print("This is a plant msg")
+                        publish(client, topics, 0, data)
+                    else:
+                         print("This is not a plant msg")
+                        publish(client, topics, 1, data)
              f = open("datalog.txt", "a")
             # now = datetime.now(tz = datetime.timezone.utc)
             # current_time = now.strftime("%H:%M:%S")
