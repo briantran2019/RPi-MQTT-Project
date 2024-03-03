@@ -7,7 +7,7 @@ import serial
 topics = [('system/plant/soilmoisture', 0), 
           ('system/pump/waterlevel', 0)]
 
-msgs = [['Current', 'Plant', 'Attempting', 'WATERING STATUS'], ['CRITICAL', 'WATERING RESULT', 'Starting', '    REASON']]
+msgs = ['Current', 'Plant', 'Attempting', 'WATERING STATUS']
 
 clientID = f"laptop{randint(0,100)}"
 broker="test.mosquitto.org"
@@ -44,19 +44,19 @@ def main():
         data = seri.readline().decode().rstrip()
 
         if data != '':
-             for i in range(len(msgs)):
-                    for j in range(len(i)):
-                        if data[0:len(i)] == i and i == 0:
-                            print("This is a plant msg")
-                            publish(client, topics, 0, data)
-                        else:
-                            print("This is not a plant msg")
-                            publish(client, topics, 1, data)
-             f = open("datalog.txt", "a")
+            for i in msgs:
+                if data[0:len(i)] == i:
+                    print("This is a plant msg")
+                    publish(client, topics, 0, data)
+                else:
+                    print("This is a pump message")
+                    publish(client, topics, 1, data)
+            print("Loop")
+            f = open("datalog.txt", "a")
             # now = datetime.now(tz = datetime.timezone.utc)
             # current_time = now.strftime("%H:%M:%S")
-             f.write(" " + data + "\n")
-             f.close()
+            f.write(" " + data + "\n")
+            f.close()
 
 
 
