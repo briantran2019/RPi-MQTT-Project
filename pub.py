@@ -31,7 +31,7 @@ def publish(client, topic, i, msg):
 def main():
     client = connect()
     client.loop_start()
-    seri = serial.Serial('/dev/ttyACM0', 115200, timeout=1)
+    seri = serial.Serial('/dev/ttyACM0', 115200, timeout=0)
     seri.reset_input_buffer()
     while True:
         seri.reset_input_buffer()
