@@ -48,9 +48,11 @@ def main():
                 if data[0:len(i)] == i:
                     print("This is a plant msg")
                     publish(client, topics, 0, data)
+                    break
                 else:
                     print("This is a pump message")
                     publish(client, topics, 1, data)
+                    break
             print("Loop")
             f = open("datalog.txt", "a")
             # now = datetime.now(tz = datetime.timezone.utc)
