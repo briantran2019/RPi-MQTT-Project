@@ -1,11 +1,12 @@
 import paho.mqtt.client as mqtt #import the client1
-import random
-from include import interactive
+from random import randint
+from time import sleep
+import serial
 
 topics = [('system/plant/soilmoisture', 0), 
           ('system/plant/numtimeswatered', 0),
           ('system/pump/waterlevel', 0)]
-clientID = f"laptop{random.randint(0,100)}"
+clientID = f"laptop{randint(0,100)}"
 broker="test.mosquitto.org"
 port = 1883
 
@@ -20,11 +21,28 @@ def connect() -> mqtt:
     client.connect(broker, port)
     return client
 
+def publish(client, topic, i, msg):
+    result = client.publish(str(topic[i][0]), f"{msg}")
+    status = result[0]
+    if status == 0:
+        print(f'Sent "{msg}" to {topic[i][0]}')
+
 def main():
     client = connect()
     client.loop_start()
+    seri = serial.Serial('/dev/ttyACM0', 115200, timeout=1)
+    seri.reset_input_buffer()
     while True:
-        interactive(client, topics)
+        #do message stuff
+        # 1. write to a log file
+        # 2. send the write to the laptop as well
+
+        #make the pi tell the arduino to capture data
+        data = seri.read()
+        if data != b'':
+             print(data)
+        sleep(2)
+
 
 if __name__ == '__main__':
     main()

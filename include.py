@@ -6,7 +6,7 @@ def publish(client, topic, i, msg):
     if status == 0:
         print(f'Sent "{msg}" to {topic[i][0]}')
 
-def getTopic() -> str:
+"""def getTopic() -> str:
     while True:
         topic = input("Which topic would you like to publish to?\n\
 1. system/plant/soilmoisture\n\
@@ -30,4 +30,4 @@ def interactive(client, topics):
         case '3': 
             publish(client, topics, 2, message)
         case _:
-            print("Invalid choice\n")
+            print("Invalid choice\n")"""
