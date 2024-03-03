@@ -45,7 +45,7 @@ def main():
 
         if data != '':
             for i, msg in enumerate(msgs):
-                print("i: " + i)
+                print("i: " + msg)
                 print("data: " + data[0:len(i)])
                 if data.startswith(msg):
                     print("This is a plant msg")
