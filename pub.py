@@ -45,7 +45,8 @@ def main():
 
         if data != '':
             for i in msgs:
-                if data[0:len(i)] == i:
+                print(data[0:len(i)] + "\n")
+                if data[0:len(i)-1] == i:
                     print("This is a plant msg")
                     publish(client, topics, 0, data)
                     break
