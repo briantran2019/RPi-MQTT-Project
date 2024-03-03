@@ -40,10 +40,10 @@ def main():
         # 2. send the write to the laptop as well
 
         #make the pi tell the arduino to capture data
-        data = seri.readline().decode().rstrip()
-        if data != b'':
-             print(data)
-             publish(client, topics, 0, data)
+        data = seri.readline()
+        if data != '':
+             print(data.decode().rstrip())
+             publish(client, topics, 0, data.decode().rstrip())
              f = open("datalog.txt", "a")
             # now = datetime.now(tz = datetime.timezone.utc)
             # current_time = now.strftime("%H:%M:%S")
