@@ -40,7 +40,7 @@ def main():
         # 2. send the write to the laptop as well
 
         #make the pi tell the arduino to capture data
-        data = seri.readline()
+        data = seri.readline().decode().rstrip()
         if data != '':
              print(data.decode().rstrip())
              publish(client, topics, 0, data.decode().rstrip())
