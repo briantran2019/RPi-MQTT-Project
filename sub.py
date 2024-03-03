@@ -1,9 +1,9 @@
 import paho.mqtt.client as mqtt #import the client1
 import random
+from pub import publish
 
-topics = [('system/plant/soilmoisture', 0),
-          ('system/plant/numtimeswatered', 0),
-          ('system/pump/waterlevel', 0)]
+topics = [('system/plant/soilinfo', 0), 
+          ('system/pump/waterinfo', 0)]
 clientID = f"rpi{random.randint(0,100)}"
 broker = "test.mosquitto.org"
 port = 1883

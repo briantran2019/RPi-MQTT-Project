@@ -4,8 +4,8 @@ from time import sleep
 import datetime
 import serial
 
-topics = [('system/plant/soilmoisture', 0), 
-          ('system/pump/waterlevel', 0)]
+topics = [('system/plant/soilinfo', 0), 
+          ('system/pump/waterinfo', 0)]
 
 msgs = ['Current Moisture: ', 'Plant needs watering.', 'Attempting to water plant.', 'Plant does not need watering.', 'WATERING STATUS: SUCCESS']
 
@@ -44,14 +44,13 @@ def main():
         data = seri.readline().decode().rstrip()
         if data != '':
             for i, msg in enumerate(msgs):
-                print("i: " + msg)
-                print("data: " + data[0:len(msg)])
                 if data.startswith(msg):
-                    print("This is a plant msg")
+                    print("message from /system/plantinfo")
                     publish(client, topics, 0, data)
+
                     break
             else:
-                print("This is a pump message")
+                print("message from /system/pumpinfo")
                 publish(client, topics, 1, data)
             f = open("datalog.txt", "a")
             # now = datetime.now(tz = datetime.timezone.utc)
