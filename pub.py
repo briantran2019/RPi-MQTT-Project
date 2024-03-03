@@ -38,7 +38,7 @@ def main():
         # 2. send the write to the laptop as well
 
         #make the pi tell the arduino to capture data
-        data = seri.read()
+        data = seri.readline().decode().rstrip()
         if data != b'':
              print(data)
         sleep(2)
