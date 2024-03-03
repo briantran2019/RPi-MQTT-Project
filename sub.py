@@ -20,7 +20,7 @@ def connect() -> mqtt:
 
 def on_message(client, userdata, message):
     print("message received:" ,str(message.payload.decode("utf-8")))
-   # print("message topic =",message.topic)
+    print("message topic =",message.topic)
 
 def on_subscribe(client, userdata, mid, granted_qos):
     print("Subscribed to Topics: ", end = "")

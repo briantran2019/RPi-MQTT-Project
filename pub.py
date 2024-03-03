@@ -45,12 +45,10 @@ def main():
         if data != '':
             for i, msg in enumerate(msgs):
                 if data.startswith(msg):
-                    print("message from /system/plantinfo")
                     publish(client, topics, 0, data)
 
                     break
             else:
-                print("message from /system/pumpinfo")
                 publish(client, topics, 1, data)
             f = open("datalog.txt", "a")
             # now = datetime.now(tz = datetime.timezone.utc)
