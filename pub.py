@@ -46,6 +46,7 @@ def main():
              now = datetime.now(tz = datetime.timezone.utc)
              current_time = now.strftime("%H:%M:%S")
              f.write(current_time + " " + data + "\n")
+             f.close()
         sleep(1)
 
 
