@@ -1,6 +1,7 @@
 import paho.mqtt.client as mqtt #import the client1
 from random import randint
 from time import sleep
+import datetime
 import serial
 
 topics = [('system/plant/soilmoisture', 0), 
@@ -32,6 +33,7 @@ def main():
     client.loop_start()
     seri = serial.Serial('/dev/ttyACM0', 115200, timeout=1)
     seri.reset_input_buffer()
+    f = open("datalog.txt", "a")
     while True:
         #do message stuff
         # 1. write to a log file
@@ -41,7 +43,10 @@ def main():
         data = seri.readline().decode().rstrip()
         if data != b'':
              print(data)
-        sleep(2)
+             current_time = datetime.now().strftime("%H:%M:%S")
+             f.write(current_time + " " + data + "\n")
+        sleep(1)
+
 
 
 if __name__ == '__main__':
