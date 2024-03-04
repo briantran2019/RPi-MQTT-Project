@@ -10,7 +10,7 @@ topics = [('system/plant/soilinfo', 0),
 msgs = ['Current Moisture: ', 'Plant needs watering.', 'Attempting to water plant.', 'Plant does not need watering.', 'WATERING STATUS: SUCCESS']
 
 clientID = f"laptop{randint(0,100)}"
-broker="test.mosquitto.org"
+broker = "broker.emqx.io"
 port = 1883
 
 def on_connect(client, userdata, flags, rc):
@@ -46,7 +46,6 @@ def main():
             for i, msg in enumerate(msgs):
                 if data.startswith(msg):
                     publish(client, topics, 0, data)
-
                     break
             else:
                 publish(client, topics, 1, data)

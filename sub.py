@@ -5,7 +5,7 @@ from pub import publish
 topics = [('system/plant/soilinfo', 0), 
           ('system/pump/waterinfo', 0)]
 clientID = f"rpi{random.randint(0,100)}"
-broker = "test.mosquitto.org"
+broker = "broker.emqx.io"
 port = 1883
 
 def connect() -> mqtt:
@@ -21,6 +21,7 @@ def connect() -> mqtt:
 def on_message(client, userdata, message):
     print("message received:" ,str(message.payload.decode("utf-8")))
     print("message topic =",message.topic)
+    print("")
 
 def on_subscribe(client, userdata, mid, granted_qos):
     print("Subscribed to Topics: ", end = "")
