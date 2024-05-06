@@ -18,7 +18,7 @@ def connect() -> mqtt:
     client.connect(broker, port)
     return client
 
-def on_message(client, userdata, message):
+def on_message(client, userdata, message):  
     print("message received:" ,str(message.payload.decode("utf-8")))
     print("message topic =",message.topic)
     print("")
